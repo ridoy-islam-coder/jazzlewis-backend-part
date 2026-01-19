@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-this-alias */
+
 import bcrypt from 'bcrypt';
 import { model, Schema } from 'mongoose';
 import config from '../../config';
@@ -6,10 +6,10 @@ import config from '../../config';
 import { Types } from 'mongoose';
 import { TUser, UserModel, UserRole } from './user.interface';
 
-// Define the schema for Verification
+
 const VerificationSchema = new Schema({
   otp: {
-    type: Number, // Allows string or number
+    type: Number, 
     // required: true,
   },
   expiresAt: {
@@ -24,7 +24,7 @@ const VerificationSchema = new Schema({
 });
 const imageSchema = new Schema({
   id: {
-    type: String, // Allows string or number
+    type: String, 
     required: true,
   },
   url: {
@@ -32,7 +32,7 @@ const imageSchema = new Schema({
     required: true,
   },
 });
-// Define the schema for the User model
+
 const UserSchema = new Schema<TUser, UserModel>(
   {
     email: {
@@ -75,22 +75,14 @@ const UserSchema = new Schema<TUser, UserModel>(
       enum: ['custom', 'google', 'facebook'],
       default: 'custom',
     },
-    // role: {
-    //   type: String,
-    //   enum: Object.values(UserRole),
-    //   required: true,
-    // },
+ 
     role: {
       type: String,
       enum: Object.values(UserRole),
       required: true,
-      default: UserRole.customer, // ✅ Fix: Add default
+      // default: UserRole.customer, 
     },
-    // gender: {
-    //   type: String,
-    //   enum: ['Male', 'Female'],
-    //   required: true,
-    // },
+
     subscription: {
       plan: {
         type: Schema.Types.ObjectId,
@@ -123,12 +115,12 @@ const UserSchema = new Schema<TUser, UserModel>(
     },
   },
   {
-    timestamps: true, // Automatically adds createdAt and updatedAt fields
+    timestamps: true, 
   },
 );
 
 
-//👉 Password change না হলে hash করবে না
+// Password change না হলে hash করবে না
 
 UserSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
@@ -162,18 +154,6 @@ UserSchema.statics.isUserExistByNumber = async function (
   return this.findOne({ countryCode, phoneNumber }).select('+password');
 };
 
-// Check if a user exists by ID
-// UserSchema.statics.IsUserExistbyId = async function (
-//   id: string,
-// ): Promise<TUser | null> {
-//   return this.findById(id);
-// };
-
-// UserSchema.statics.IsUserExistbyId = async function (
-//   id: string,
-// ): Promise<Pick<TUser, '_id' | 'email' | 'role' | 'password'> | null> {
-//   return this.findById(id).select('+password');
-// };
 
 UserSchema.statics.IsUserExistbyId = async function (
   id: string,
@@ -207,7 +187,7 @@ UserSchema.pre('aggregate', function (next) {
   this.pipeline().unshift({ $match: { isDeleted: { $ne: true } } });
   next();
 });
-// Create and export the User model
+
 const User = model<TUser, UserModel>('User', UserSchema);
 
 export default User;

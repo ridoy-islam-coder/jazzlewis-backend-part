@@ -107,7 +107,6 @@ const verifyEmailController = catchAsync(async (req: Request, res: Response) => 
       fullName: user.fullName,
       phoneNumber: user.phoneNumber,
       countryCode: user.countryCode,
-      // gender: user.gender,
       role: user.role,
       isVerified: user.isVerified,
     },
@@ -224,6 +223,14 @@ const login = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+
+
+
+
+
+
+
+
 const resetPassword = catchAsync(async (req: Request, res: Response) => {
   const token = req.headers.token as string;
   const { newPassword } = req.body;
@@ -260,6 +267,26 @@ const resetPassword = catchAsync(async (req: Request, res: Response) => {
     data: { user },
   });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // 3. Change Password - for logged-in users
 const changePassword = catchAsync(async (req: Request, res: Response) => {
@@ -488,6 +515,10 @@ export const userResetPassword = catchAsync(
   },
 );
 
+
+
+
+
 export const authControllers = {
   login,
   resetPassword,
@@ -499,4 +530,5 @@ export const authControllers = {
   facebookLogin,
   userRegistration,
   verifyEmailController,
+  userResetPassword,
 };

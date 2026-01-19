@@ -12,10 +12,7 @@ export enum status {
   blocked = 'blocked',
 }
 
-// export enum Gender {
-//   Male = 'Male',
-//   Female = 'Female',
-// }
+
  interface Verification {
   otp: string | number;
   expiresAt: Date;
@@ -32,7 +29,7 @@ export interface TUser {
   password: string;
   name: string;
   phoneNumber: string;
-  // gender: Gender;
+  
   image: image;
   needsPasswordChange: boolean;
   passwordChangedAt?: Date;

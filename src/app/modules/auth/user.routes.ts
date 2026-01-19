@@ -13,8 +13,12 @@ router.post( '/refresh-token',validateRequest(authValidation.refreshTokenValidat
 router.post('/google', authControllers.googleLogin);
 router.post('/facebook', authControllers.facebookLogin);
 
-router.post('/codeVerification', authControllers.codeVerification,);
+router.post('/emailVerification', authControllers.codeVerification,);
 router.post('/userVerifyOtp', authControllers.verifyOtpController,);
+router.patch('/userResetPassword', authControllers.userResetPassword,);
+
+
+
 
 router.patch('/change-password',auth(USER_ROLE.sup_admin, USER_ROLE.user),authControllers.changePassword,);
 router.patch('/reset-password', authControllers.resetPassword);

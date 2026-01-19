@@ -48,17 +48,12 @@ const auth = (...userRoles: string[]) => {
       throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized');
     }
 
-    // ✅ Attach full user data (id + email)
-    // req.user = {
-    //   _id: isExist._id,
-    //   email: isExist.email,
-    //   role: isExist.role,
-    // };
+
 
     req.user = {
       id: isExist._id,
       userId: isExist._id,
-      _id: isExist._id, // 👈 Keeps backward compatibility
+      _id: isExist._id, 
       email: isExist.email,
       role: isExist.role,
     };
