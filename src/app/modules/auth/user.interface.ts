@@ -27,5 +27,6 @@ export type TRegister = {
   fullName: string;
   phoneNumber: string;
   countryCode: string;
+  role: string;
 
 }

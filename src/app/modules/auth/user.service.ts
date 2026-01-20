@@ -78,8 +78,7 @@ const verifyEmail = async (email: string, otpInput: number) => {
     fullName: payload.fullName,
     phoneNumber: payload.phoneNumber,
     countryCode: payload.countryCode,
-    // gender: payload.gender,
-    role: UserRole.customer,
+    role: payload.role as UserRole,
     isVerified: true,
     verification: {
       otp: null,

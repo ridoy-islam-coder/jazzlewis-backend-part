@@ -91,12 +91,13 @@ const deleteAccount = async (id: string, password: string) => {
     throw new AppError(httpStatus.NOT_ACCEPTABLE, 'Password does not match!');
   }
 
-  const result = await User.findByIdAndUpdate(
-    id,
-    { $set: { isDeleted: true } },
-    { new: true },
-  );
-
+  // const result = await User.findByIdAndUpdate(
+  //   id,
+  //   { $set: { isDeleted: true } },
+  //   { new: true , select: '+isDeleted'},
+  // );
+ // Hard delete
+   const result = await User.findByIdAndDelete(id);
   return result;
 };
 

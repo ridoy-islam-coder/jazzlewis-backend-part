@@ -80,7 +80,7 @@ const UserSchema = new Schema<TUser, UserModel>(
       type: String,
       enum: Object.values(UserRole),
       required: true,
-      // default: UserRole.customer, 
+      default: UserRole.customer, 
     },
 
     subscription: {

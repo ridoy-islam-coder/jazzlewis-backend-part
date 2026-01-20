@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { UserRole } from './user.interface';
 
 // Main user schema
 const createUserZodSchema = z.object({
@@ -20,7 +21,7 @@ const createUserZodSchema = z.object({
       .enum(['custom', 'google', 'facebook'])
       .optional()
       .default('custom'),
-    // role: z.enum(Object.values(UserRole) as [string, ...string[]]),
+    role: z.enum(Object.values(UserRole) as [string, ...string[]]),
     isActive: z.boolean().optional().default(true),
     isVerified: z.boolean().optional().default(false),
     isDeleted: z.boolean().optional().default(false),

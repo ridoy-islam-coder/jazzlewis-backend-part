@@ -17,7 +17,7 @@ const router = Router();
 // //toatal user count
 router.get(
   '/total-count',
-  auth(USER_ROLE.admin, USER_ROLE.sup_admin),
+  auth( USER_ROLE.admin,USER_ROLE.user, USER_ROLE.super_admin),
   userControllers.getTotalUsersCount,
 );
 router.get(
@@ -46,20 +46,20 @@ router.patch(
 );
 router.get(
   '/profile',
-  auth(USER_ROLE.admin, USER_ROLE.user),
+  auth( USER_ROLE.admin,USER_ROLE.user, USER_ROLE.super_admin),
   userControllers.getme,
 );
-// Block user
+// Block user 
 router.patch(
   '/block/:id',
-  auth(USER_ROLE.admin, USER_ROLE.sup_admin),
+  auth(USER_ROLE.admin,USER_ROLE.user,),
   userControllers.blockUser,
 );
 
 // Unblock user
 router.patch(
   '/unblock/:id',
-  auth(USER_ROLE.admin, USER_ROLE.sup_admin),
+  auth(USER_ROLE.admin, USER_ROLE.super_admin),
   userControllers.unblockUser,
 );
 
@@ -70,14 +70,8 @@ router.get(
 );
 router.get(
   '/',
-  auth(USER_ROLE.vendor, USER_ROLE.admin),
+  auth( USER_ROLE.admin,USER_ROLE.user, USER_ROLE.super_admin),
   userControllers.getAllUsers,
 );
 
-router.delete(
-  '/',
-  auth(USER_ROLE.user, USER_ROLE.sup_admin, USER_ROLE.admin),
-  validateRequest(authValidation.deleteAccountZodSchema),
-  userControllers.deleteAccount,
-);
 export const userRoutes = router;
